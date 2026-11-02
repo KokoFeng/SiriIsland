@@ -12,6 +12,7 @@ import android.os.*
 import android.speech.*
 import android.speech.tts.TextToSpeech
 import android.view.*
+import android.view.WindowManager.LayoutParams as L
 import android.view.inputmethod.InputMethodManager
 import org.json.*
 import java.net.HttpURLConnection
@@ -47,7 +48,6 @@ class IslandService : Service() {
         prefs = getSharedPreferences("siri", MODE_PRIVATE)
         wm = getSystemService(WINDOW_SERVICE) as WindowManager
         island = IslandView(this)
-        val L = WindowManager.LayoutParams
         lp = WindowManager.LayoutParams(-2, -2, L.TYPE_APPLICATION_OVERLAY,
             L.FLAG_NOT_FOCUSABLE or L.FLAG_LAYOUT_NO_LIMITS or L.FLAG_NOT_TOUCH_MODAL or
                 L.FLAG_WATCH_OUTSIDE_TOUCH, PixelFormat.TRANSLUCENT)
