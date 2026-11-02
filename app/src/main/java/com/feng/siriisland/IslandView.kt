@@ -27,7 +27,7 @@ class IslandView(c: Context) : FrameLayout(c) {
     var camOn = false
         set(v) { field = v; invalidate() }
     var level = 0f
-    var dotSize = 6; var dotX = 30; var dotY = 0; var idleW = 120
+    var dotSize = 6; var dotX = 30; var dotY = 0; var idleW = 150; var idleH = 40
     var mode = Mode.IDLE; private set
 
     private val d = resources.displayMetrics.density
@@ -90,6 +90,7 @@ class IslandView(c: Context) : FrameLayout(c) {
     }
     fun setListening(b: Boolean) { listening = b; updateSpin() }
     fun setThinking(b: Boolean) { thinking = b; updateSpin() }
+    fun isThinkingNow() = thinking
     fun focusInput() {
         input.requestFocus()
         context.getSystemService(InputMethodManager::class.java).showSoftInput(input, 0)
@@ -98,7 +99,7 @@ class IslandView(c: Context) : FrameLayout(c) {
     private fun retarget(animate: Boolean) {
         val tw: Float; val th: Float
         when (mode) {
-            Mode.IDLE -> { tw = dp(idleW).toFloat(); th = dp(37).toFloat() }
+            Mode.IDLE -> { tw = dp(idleW).toFloat(); th = dp(idleH).toFloat() }
             Mode.SIRI -> {
                 tw = dp(340).toFloat()
                 text.measure(makeMeasureSpec(dp(300), EXACTLY), makeMeasureSpec(0, UNSPECIFIED))

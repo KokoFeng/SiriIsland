@@ -8,15 +8,30 @@
     <queries>
         <intent><action android:name="android.speech.RecognitionService"/></intent>
         <intent><action android:name="android.intent.action.TTS_SERVICE"/></intent>
+        <intent><action android:name="android.speech.action.RECOGNIZE_SPEECH"/></intent>
     </queries>
-    <application android:label="Siri Island"
-        android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar">
-        <activity android:name=".MainActivity" android:exported="true">
+    <application android:label="Siri"
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+        <activity android:name=".MainActivity" android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".SearchActivity" android:exported="false"
+            android:theme="@style/Translucent" android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
+        <service android:name=".IslandAccessibility" android:exported="true"
+            android:label="Siri Dynamic Island"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility"/>
+        </service>
         <service android:name=".IslandService" android:exported="false"
             android:foregroundServiceType="specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
